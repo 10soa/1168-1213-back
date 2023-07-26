@@ -4,7 +4,9 @@ const app = express();
 const bodyParser = require("body-parser");
 const cors = require("cors");
 
-// const PORT = process.env.PORT || 2002 ;
+//Connection base Mongo
+require("./config/database");
+
 const test = require("./routes/Test");
 
 app.use(cors({ origin: "*" }));
