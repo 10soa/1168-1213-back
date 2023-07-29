@@ -28,6 +28,7 @@ exports.login = async (username, mdp, res) => {
   }
 }
 
+
 exports.createUtilisateur = async (req, res) => {
   try {
     const { mdp } = req.body;
@@ -38,7 +39,16 @@ exports.createUtilisateur = async (req, res) => {
     const saltRounds = 10;
     const salt = await bcrypt.genSalt(saltRounds);
     const configuration = await bcrypt.hash(mdp, salt);
-    const mdpCrypter = { ...req.body, mdp: configuration };
+
+    const mdpCrypter = {
+      nom: req.body.nom,
+      prenom: req.body.prenom,
+      email: req.body.email,
+      pseudo: req.body.pseudo,
+      naissance: req.body.naissance,
+      pays: req.body.pays,
+      mdp: configuration,
+    };
 
     let data = await Utilisateur.create(mdpCrypter);
     return res.status(201).json({ message: 'Utilisateur créé avec succès.', data });
@@ -46,6 +56,7 @@ exports.createUtilisateur = async (req, res) => {
     return res.status(500).json({ error: 'Une erreur s\'est produite lors de la création de l\'utilisateur.' });
   }
 };
+
 
 
 

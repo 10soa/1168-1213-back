@@ -24,7 +24,7 @@ exports.login = async (req, res) => {
 
 exports.createUtilisateur = async (req, res) => {
   utilisateurRepository
-    .createUtilisateur(req, res)
-    .then((result) => res.status(200).json({ result }))
+    .createUtilisateur(req, res) 
+    .then((result) => res.status(200).json({ result })) 
     .catch();
 };
