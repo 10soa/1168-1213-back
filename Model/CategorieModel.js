@@ -6,7 +6,6 @@ var AutoIncrement = require('mongoose-sequence')(mongoose);
 const categorieSchema = new Schema({
     categorie: {type:String},
     article: [{
-        article_id : {type:Number},
         libelle : {type:String},
         description : {type:String},
         localisation : {type:String},
@@ -22,6 +21,5 @@ const categorieSchema = new Schema({
     }],
 });
 
-categorieSchema.plugin(AutoIncrement, { inc_field: 'article.article_id' });
 let Categorie = mongoose.model("Categorie", categorieSchema,"Categorie");
 module.exports = {Categorie}
