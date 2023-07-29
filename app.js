@@ -8,6 +8,8 @@ const cors = require("cors");
 require("./config/database");
 
 const test = require("./routes/Test");
+const utilisateur = require("./routes/Utilisateur");
+const notification = require("./routes/Notification");
 
 app.use(cors({ origin: "*" }));
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -15,6 +17,8 @@ app.use(bodyParser.json());
 
 /* routes */
 app.use("/", test);
+app.use("/APK_projet/Utilisateur", utilisateur);
+app.use("/APK_projet/Notification", notification);
 
 
 module.exports = app;
