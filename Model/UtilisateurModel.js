@@ -2,7 +2,6 @@ const mongoose = require( 'mongoose')
 const Schema = mongoose.Schema;
 var AutoIncrement = require('mongoose-sequence')(mongoose);
 
-// Create Schema Instance and add schema propertise
 const testSchema = new Schema({
     nom : {type: String},
     prenom : {type: String},
@@ -11,8 +10,21 @@ const testSchema = new Schema({
     naissance : {type : Date},
     pays : {type:String},
     mdp : {type:String},
-    partage : [],
-    favoris : [],
+    partage : [{
+        description : {type:String},
+        libelle : {type:String},
+        image : {type:String},
+        note : {type:Number},
+        localisation : {type:String}
+    }],
+    favoris : [{
+        article_id : {type:Number},
+        libelle : {type:String},
+        description : {type:String},
+        localisation : {type:String},
+        datepublication : {type:Date}
+    }],
 });
+
 let Utilisateur = mongoose.model("Utilisateur", testSchema,"Utilisateur");
 module.exports = {Utilisateur}
