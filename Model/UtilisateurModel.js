@@ -1,6 +1,7 @@
 const mongoose = require( 'mongoose')
 const Schema = mongoose.Schema;
 var AutoIncrement = require('mongoose-sequence')(mongoose);
+var ObjectID = require("mongoose").Types.ObjectId;
 
 const testSchema = new Schema({
     nom : {type: String},
@@ -18,7 +19,7 @@ const testSchema = new Schema({
         localisation : {type:String}
     }],
     favoris : [{
-        article_id : {type:Number},
+        article_id : {type:ObjectID},
         libelle : {type:String},
         description : {type:String},
         localisation : {type:String},
