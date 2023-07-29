@@ -11,14 +11,17 @@ exports.getAllCategories = async () => {
   };
 
 
-exports.findArticles = async (motcle) => {
+exports.findArticles = async (recherche) => {
     try {
         var unwind = { $unwind: "$article" };
         var match = {
         $match: {
-             "article.mot_cle": { $regex:  motcle , $options: "i" } 
+             "article.mot_cle": { $regex:  recherche.motcle , $options: "i" } ,
         },
         };
+        if (recherche.categorie) {
+            matchQuery._id = new ObjectID(recherche.categorie);
+          }
         let data = await Categorie.aggregate([unwind, match]);
         return data;
     } catch (err) {

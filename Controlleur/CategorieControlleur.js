@@ -31,7 +31,7 @@ exports.getAllArticlesCategorie = async (req, res) => {
 
 exports.findArticles = async (req,res) => {
     try {
-        const categories = await categorieRepository.findArticles(req.query.motcle);
+        const categories = await categorieRepository.findArticles(req.query);
          res.status(200).json({
            status: 200,
            data: categories,

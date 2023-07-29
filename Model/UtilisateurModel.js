@@ -16,14 +16,14 @@ const testSchema = new Schema({
         libelle : {type:String},
         image : {type:String},
         note : {type:Number},
-        localisation : {type:String}
+        localisation : {type:String},
+        date_publication:{type: Date},
     }],
     favoris : [{
         article_id : {type:ObjectID},
         libelle : {type:String},
         description : {type:String},
         localisation : {type:String},
-        datepublication : {type:Date}
     }],
 });
 
