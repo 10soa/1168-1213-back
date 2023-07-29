@@ -2,6 +2,7 @@ var { Utilisateur } = require("../Model/UtilisateurModel");
 var ObjectID = require("mongoose").Types.ObjectId;
 const { BSONSymbol } = require("mongodb");
 const bcrypt = require('bcrypt');
+const flatted = require('flatted');
 
 exports.getAllUtilisateurs = async (res) => {
   try {
@@ -28,34 +29,24 @@ exports.login = async (username, mdp, res) => {
   }
 }
 
-
 exports.createUtilisateur = async (req, res) => {
   try {
     const { mdp } = req.body;
     if (!mdp) {
       return res.status(400).json({ error: 'Le champ "Mot de passe" est requis.' });
     }
-
     const saltRounds = 10;
     const salt = await bcrypt.genSalt(saltRounds);
-    const configuration = await bcrypt.hash(mdp, salt);
-
-    const mdpCrypter = {
-      nom: req.body.nom,
-      prenom: req.body.prenom,
-      email: req.body.email,
-      pseudo: req.body.pseudo,
-      naissance: req.body.naissance,
-      pays: req.body.pays,
-      mdp: configuration,
-    };
-
-    let data = await Utilisateur.create(mdpCrypter);
-    return res.status(201).json({ message: 'Utilisateur créé avec succès.', data });
+    const hashedPassword = await bcrypt.hash(mdp, salt);
+    const bodyWithHashedPassword = { ...req.body, mdp: hashedPassword };
+    let data = await Utilisateur.create(bodyWithHashedPassword);
+    return data;
   } catch (err) {
     return res.status(500).json({ error: 'Une erreur s\'est produite lors de la création de l\'utilisateur.' });
   }
 };
+
+
 
 
 
