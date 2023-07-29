@@ -18,12 +18,19 @@ exports.getAllUtilisateurs = async (res) => {
 
 exports.login = async (username, mdp, res) => {
   try{
-    let data = await Utilisateur.findOne({ email: username, mdp: mdp });
-    if(data){
-      return data;
+    let data = await Utilisateur.find({ email: username});
+    console.log(typeof data);
+     if(data){
+      for (const utilisateur of data){
+        const match = await bcrypt.compare(mdp,utilisateur.mdp);
+        if(match){
+          return utilisateur
+        }
+      }
     }else{
       throw new Error("Email ou mot de passe incorrect");
     }
+    throw new Error("Email ou mot de passe incorrect");
   }catch (err){
     throw err;
   }
