@@ -52,7 +52,49 @@ exports.createUtilisateur = async (req, res) => {
     return res.status(500).json({ error: 'Une erreur s\'est produite lors de la création de l\'utilisateur.' });
   }
 };
+// { 
+//   libelle: String,
+//   description: String,
+//   image: String,
+//   localisation: String,
+// }
 
+exports.addUserShare = async (id,partage) => {
+  try{
+    if(!partage.libelle){
+      throw new Error(" Libelle obligatoire");
+    }
+    if(!partage.note){
+      throw new Error(" Note obligatoire");
+    }
+    if(partage.note && partage.note > 5){
+      throw new Error(" La valeur de note doit être inférieure ou égale à 5");
+    }
+    if(!partage.localisation){
+      throw new Error(" Localisation obligatoire");
+    }
+    const data = await Utilisateur.findOneAndUpdate(
+      {
+        _id: new ObjectID(id)
+      },
+      {
+        $push: {
+          "partage": {
+            libelle: partage.libelle,
+            description: partage.description && partage.description,
+            date_publication : Date.now(),
+            localisation: partage.localisation,
+            image: partage.image,
+            note: partage.note
+          },
+        },
+      }
+    );
+    return data;
+  }catch (err){
+    throw err;
+  }
+}
 
 
 
