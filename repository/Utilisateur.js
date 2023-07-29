@@ -1,6 +1,5 @@
 var { Utilisateur } = require("../Model/UtilisateurModel");
 var ObjectID = require("mongoose").Types.ObjectId;
-const { Console } = require("console");
 const { BSONSymbol } = require("mongodb");
 
 exports.getAllUtilisateurs = async (res) => {
@@ -19,17 +18,11 @@ exports.login = async (username, mdp, res) => {
   try{
     let data = await Utilisateur.findOne({ email: username, mdp: mdp });
     if(data){
-      res.status(200).json({ data });
+      return data;
     }else{
-      res.status(400).json({
-        status: 400,
-        message: "Email ou mot de passe invalide",
-      });
+      throw new Error("Email ou mot de passe incorrect");
     }
   }catch (err){
-    res.status(400).json({
-      status: 400,
-      message: err.message,
-    });
+    throw err;
   }
 }

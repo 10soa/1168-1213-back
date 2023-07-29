@@ -12,6 +12,12 @@ exports.getAllUtilisateurs = async (req, res) => {
 
 exports.login = async (req, res) => {
   try {
-    await  utilisateurRepository.login(req.body.email,req.body.mdp,res);
-  } catch (err) {}
+    const data = await  utilisateurRepository.login(req.body.email,req.body.mdp,res);
+    res.status(200).json({ data });
+  } catch (err) {
+    res.status(400).json({
+      status: 400,
+      message: err.message,
+    });
+  }
 };
