@@ -15,3 +15,10 @@ exports.login = async (req, res) => {
     await  utilisateurRepository.login(req.body.email,req.body.mdp,res);
   } catch (err) {}
 };
+
+exports.createUtilisateur = async (req, res) => {
+  utilisateurRepository
+    .createUtilisateur(req, res)
+    .then((result) => res.status(200).json({ result }))
+    .catch();
+};
