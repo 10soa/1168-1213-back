@@ -17,7 +17,10 @@ const categorieSchema = new Schema({
         }],
         images: [{
             lien : {type:String}
-        }]
+        }],
+        mot_cle : {type:String},
+        x: {type:Number},
+        y:{type:Number}
     }],
 });
 
