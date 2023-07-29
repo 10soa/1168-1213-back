@@ -14,3 +14,22 @@ exports.getAllUtilisateurs = async (res) => {
     });
   }
 };
+
+exports.login = async (username, mdp, res) => {
+  try{
+    let data = await Utilisateur.findOne({ email: username, mdp: mdp });
+    if(data){
+      res.status(200).json({ data });
+    }else{
+      res.status(400).json({
+        status: 400,
+        message: "Email ou mot de passe invalide",
+      });
+    }
+  }catch (err){
+    res.status(400).json({
+      status: 400,
+      message: err.message,
+    });
+  }
+}

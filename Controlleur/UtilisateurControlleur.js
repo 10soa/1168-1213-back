@@ -9,3 +9,9 @@ exports.getAllUtilisateurs = async (req, res) => {
     });
   } catch (err) {}
 };
+
+exports.login = async (req, res) => {
+  try {
+    await  utilisateurRepository.login(req.body.email,req.body.mdp,res);
+  } catch (err) {}
+};
