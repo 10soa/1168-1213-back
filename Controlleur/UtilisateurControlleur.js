@@ -88,3 +88,36 @@ exports.getAllUserExperiencePagination = async (req, res) => {
       });
   }
 };
+
+exports.addFavoris = async (req,res) => {
+  try {
+    console.log('params',req.params);
+    // console.log('res',res);
+    const utilisateurs = await utilisateurRepository.addFavoris(req.params.id,req.params.article);
+     res.status(200).json({
+       status: 200,
+       data: utilisateurs,
+     });
+   } catch (err) {
+       res.status(400).json({
+           status: 400,
+           message: err.message,
+       });
+   }
+}
+
+exports.listeFavoris = async (req,res) => {
+  try {
+    console.log('params',req.params);
+    const utilisateurs = await utilisateurRepository.listeFavorisUtilisateur(req.params.id);
+     res.status(200).json({
+       status: 200,
+       data: utilisateurs,
+     });
+   } catch (err) {
+       res.status(400).json({
+           status: 400,
+           message: err.message,
+       });
+   }
+}

@@ -10,5 +10,7 @@ router.post('/utilisateurs/:id', utilisateur.addUserShare);
 router.get('/partage/:idparatage', utilisateur.getOnePublication);
 router.get('/fiche/:idutilisateur', utilisateur.getFicheUtilisateur);
 router.get('/recherchePartage/:off/:lim', utilisateur.getAllUserExperiencePagination);
+router.get('/favoris/:id', utilisateur.listeFavoris);
+router.post('/favoris/:id/:article', utilisateur.addFavoris);
 
 module.exports = router;

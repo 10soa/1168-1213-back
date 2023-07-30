@@ -1,8 +1,8 @@
 var { Utilisateur } = require("../Model/UtilisateurModel");
 var ObjectID = require("mongoose").Types.ObjectId;
-const { BSONSymbol } = require("mongodb");
+var { Categorie } = require("../Model/CategorieModel");
+const categorieRepository = require("../repository/Categorie");
 const bcrypt = require('bcrypt');
-const flatted = require('flatted');
 
 exports.getAllUtilisateurs = async (res) => {
   try {
@@ -160,6 +160,109 @@ exports.getAllUserExperiencePagination = async (off, lim, res) => {
     });
   }
 };
+
+
+// deleteafavoris
+exports.deleteFavoris = async (idutilisateur,idarticle) => {
+  try{
+    const data = await Categorie.findOneAndUpdate(
+      { "article._id": new ObjectID(idarticle)},
+      { $pull: { "article.$.liste_utilisateur_favoris": idutilisateur }},
+      { upsert: true, new: true },
+    );
+    if(data){
+    const u = await Utilisateur.findOneAndUpdate(
+      { _id: new ObjectID(idutilisateur) },
+      { $pull: { favoris: { article_id: new ObjectID(idarticle) } } },
+      { new: true });
+      if(!u){
+        throw new error("Utilisateur inexistant");
+      }
+    }
+    return data;
+  }catch(err){
+    throw err;
+  }
+}
+
+// ajout favoris
+
+// article_id : {type:ObjectID},
+// libelle : {type:String},
+// description : {type:String},
+// localisation : {type:String},
+exports.addFavoris = async (idutilisateur,idarticle) => {
+  try{
+    if(!idutilisateur){
+      throw new Error("Joueur pas connecté");
+    }
+    if(!idarticle){
+      throw new Error("Il n'y a pas d'article");
+    }
+    const article = await categorieRepository.getOneArticle(idarticle);
+    if(!article || (article && article.length === 0)){
+      throw new Error("Article inexistant");
+    }
+    if(article[0].article.liste_utilisateur_favoris ){
+      for (const user of article[0].article.liste_utilisateur_favoris){
+        if(user === idutilisateur){
+          return this.deleteFavoris(idutilisateur,idarticle);
+        }
+      }
+    }
+    const data = await Utilisateur.findOneAndUpdate(
+      {
+        _id: new ObjectID(idutilisateur)
+      },
+      {
+        $push: {
+          "favoris": {
+            libelle: article[0].article.libelle,
+            description: article[0].article.court_description && article[0].article.court_description,
+            localisation: article[0].article.localisation,
+            article_id: new ObjectID(article[0].article._id),
+            image: article[0].article.images.length > 0 ? article[0].article.images[0].lien : null
+          },
+        },
+      }
+    );
+    if(!data){
+      throw new Error("Utilisateur inexistant");
+    }
+    const farticle = await Categorie.findOneAndUpdate(
+      {
+        "article._id": new ObjectID(idarticle)
+      },
+      {
+        $push: {
+          "article.$.liste_utilisateur_favoris": idutilisateur
+        },
+      }
+    );
+    return farticle;
+  } catch (err) {
+    throw err; 
+  }
+}
+
+
+// liste des articles favoris d'un utilisateur
+exports.listeFavorisUtilisateur = async (utilisateur) =>{
+  try {
+    var unwind = { $unwind: "$favoris" };
+    var match = { $match: {
+      _id: new ObjectID(utilisateur)
+    }};
+    var project = {
+      _id: 0,
+      favoris: 1
+    };
+    let data = await Utilisateur.aggregate([unwind, match, { $project: project }]);
+    return data;
+  } catch (err) {
+      throw err;
+  }
+}
 
 
 

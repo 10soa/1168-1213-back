@@ -20,7 +20,8 @@ const categorieSchema = new Schema({
         }],
         mot_cle : {type:String},
         x: {type:Number},
-        y:{type:Number}
+        y:{type:Number},
+        liste_utilisateur_favoris:[]
     }],
 });
 
