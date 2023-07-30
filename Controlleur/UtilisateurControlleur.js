@@ -56,3 +56,19 @@ exports.getOnePublication = async (req, res) => {
       });
   }
 };
+
+/* fiche Publication */
+exports.getFicheUtilisateur = async (req, res) => {
+  try {
+   const utilisateurs = await utilisateurRepository.getFicheUtilisateur(req.params.idutilisateur);
+    res.status(200).json({
+      status: 200,
+      data: utilisateurs,
+    });
+  } catch (err) {
+      res.status(400).json({
+          status: 400,
+          message: err.message,
+      });
+  }
+};

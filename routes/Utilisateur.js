@@ -8,5 +8,6 @@ router.post('/login', utilisateur.login);
 router.post('/inscription', utilisateur.createUtilisateur);
 router.post('/utilisateurs/:id', utilisateur.addUserShare);
 router.get('/partage/:idparatage', utilisateur.getOnePublication);
+router.get('/fiche/:idutilisateur', utilisateur.getFicheUtilisateur);
 
 module.exports = router;

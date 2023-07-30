@@ -112,6 +112,23 @@ exports.getOnePublication = async (id) => {
   }
 };
 
+/* fiche Utilisateur */
+exports.getFicheUtilisateur = async (id) => {
+  try {
+    const varProject = { $project: { partage: 0, favoris: 0 } };
+    const varMatch = {
+      $match: {
+        _id : new ObjectID(id)
+      },
+    };
+    const data = await Utilisateur.aggregate([varMatch,varProject]);  
+  return data;
+  } catch (err) {
+      throw err; 
+  }
+};
+
+
 
 
 
