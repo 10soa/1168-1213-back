@@ -59,3 +59,35 @@ exports.getOneArticle = async (req, res) => {
       });
   }
 };
+
+/* liste contenu multimédia Photos */
+exports.getAllMediasImages = async (req, res) => {
+  try {
+   const categories = await categorieRepository.getAllMediasImages(req.params.off,req.params.lim,res);
+    res.status(200).json({
+      status: 200,
+      data: categories,
+    });
+  } catch (err) {
+      res.status(400).json({
+          status: 400,
+          message: err.message,
+      });
+  }
+};
+
+/* liste contenu multimédia Photos */
+exports.getAllMediasVideos = async (req, res) => {
+  try {
+   const categories = await categorieRepository.getAllMediasVideos(req.params.off,req.params.lim,res);
+    res.status(200).json({
+      status: 200,
+      data: categories,
+    });
+  } catch (err) {
+      res.status(400).json({
+          status: 400,
+          message: err.message,
+      });
+  }
+};

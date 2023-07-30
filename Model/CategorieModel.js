@@ -7,9 +7,9 @@ const categorieSchema = new Schema({
     categorie: {type:String},
     article: [{
         libelle : {type:String},
+        court_description : {type:String},
         description : {type:String},
         localisation : {type:String},
-        datepublication : {type:Date},
         site : {type:String},
         autres : {type:String},
         videos : [{

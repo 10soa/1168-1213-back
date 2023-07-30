@@ -59,3 +59,79 @@ exports.getOneArticle = async (id) => {
       throw err; 
   }
 };
+
+/* liste contennu multimédia  photos */
+exports.getAllMediasImages = async (off, lim, res) => {
+  try {
+    var unwind = { $unwind: "$article" };
+    var match = {
+      $match: {
+        "article.images": { $ne: [] }
+      },
+    };
+    const varProject = { $project: { _id : 0,categorie:0,"article.description":0,"article.court_description":0,
+    "article.localisation":0,"article.site":0,"article.videos":0,"article.mot_cle":0,
+    "article.autres":0,"article.x":0,"article.y":0
+    } };
+    var data1 = await Categorie.aggregate([unwind,match,varProject]);
+    const page = off || 0;
+    const pageNumber = lim || 20;
+    var total = data1.length;
+    let totalPage = Math.floor(Number(total) / pageNumber);
+    if (Number(total) % pageNumber != 0) {
+      totalPage = totalPage + 1;
+    }
+    var data = await Categorie.aggregate([unwind,match,varProject])
+      .skip(Number(off))
+      .limit(Number(lim));
+    return {
+      multimedia: data,
+      page: page,
+      pageNumber: pageNumber,
+      totalPage: totalPage,
+    };
+  } catch (err) {
+    res.status(400).json({
+      status: 400,
+      message: err.message,
+    });
+  }
+};
+
+/* liste contennu multimédia vidéos */
+exports.getAllMediasVideos = async (off, lim, res) => {
+  try {
+    var unwind = { $unwind: "$article" };
+    var match = {
+      $match: {
+        "article.videos": { $ne: [] }
+      },
+    };
+    const varProject = { $project: { _id : 0,categorie:0,"article.description":0,"article.court_description":0,
+    "article.localisation":0,"article.site":0,"article.images":0,"article.mot_cle":0,
+    "article.autres":0,"article.x":0,"article.y":0
+    } };
+    var data1 = await Categorie.aggregate([unwind,match,varProject]);
+    const page = off || 0;
+    const pageNumber = lim || 20;
+    var total = data1.length;
+    let totalPage = Math.floor(Number(total) / pageNumber);
+    if (Number(total) % pageNumber != 0) {
+      totalPage = totalPage + 1;
+    }
+    var data = await Categorie.aggregate([unwind,match,varProject])
+      .skip(Number(off))
+      .limit(Number(lim));
+    return {
+      multimedia: data,
+      page: page,
+      pageNumber: pageNumber,
+      totalPage: totalPage,
+    };
+  } catch (err) {
+    res.status(400).json({
+      status: 400,
+      message: err.message,
+    });
+  }
+};
