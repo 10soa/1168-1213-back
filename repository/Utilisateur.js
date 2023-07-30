@@ -16,6 +16,7 @@ exports.getAllUtilisateurs = async (res) => {
   }
 };
 
+// login
 exports.login = async (username, mdp, res) => {
   try{
     let data = await Utilisateur.find({ email: username});
@@ -52,13 +53,8 @@ exports.createUtilisateur = async (req, res) => {
     return res.status(500).json({ error: 'Une erreur s\'est produite lors de la création de l\'utilisateur.' });
   }
 };
-// { 
-//   libelle: String,
-//   description: String,
-//   image: String,
-//   localisation: String,
-// }
 
+// ajout partage experience d'un utilisateur
 exports.addUserShare = async (id,partage) => {
   try{
     if(!partage.libelle){
@@ -90,6 +86,9 @@ exports.addUserShare = async (id,partage) => {
         },
       }
     );
+    if(!data){
+      throw new Error("Utilisateur inexistant");
+    }
     return data;
   }catch (err){
     throw err;

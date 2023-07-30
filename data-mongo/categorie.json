@@ -4,7 +4,6 @@
    {
         "categorie" :"Destination incontournables",
         "article":[{
-            "article_id":1,
             "libelle": "Parc national de l'Isalo",
             "court-description":"Une fenêtre ouverte sur la biodiversité du Sud Malgache",
             "description":"Situé dans le sud-ouest de Madagascar, ce parc national est réputé pour ses formations rocheuses spectaculaires, ses canyons profonds, ses piscines naturelles et sa faune variée.",
@@ -12,14 +11,13 @@
             "site":"http://www.parcs-madagascar.com/parcs/isalo.php",
             "autres":null,
             "videos" : [],
-            "images":["https://th.bing.com/th/id/R.6429da7703c5671b19ffae37fbacbef0?rik=wOrALhoWS2cRcQ&pid=ImgRaw&r=0",
-            "https://s-media-cache-ak0.pinimg.com/originals/99/c9/9d/99c99d4f4011de791b30dc449588cb4d.jpg",
-            "https://th.bing.com/th/id/OIP.UQgh0okCT1z5sckz_DHSaQHaGj?pid=ImgDet&rs=1"],
+            "images":[{"lien":"https://th.bing.com/th/id/R.6429da7703c5671b19ffae37fbacbef0?rik=wOrALhoWS2cRcQ&pid=ImgRaw&r=0"},
+            {"lien":"https://s-media-cache-ak0.pinimg.com/originals/99/c9/9d/99c99d4f4011de791b30dc449588cb4d.jpg"},
+            {"lien":"https://th.bing.com/th/id/OIP.UQgh0okCT1z5sckz_DHSaQHaGj?pid=ImgDet&rs=1"}],
             "x":-22.46462138507317, 
             "y":45.261512941372786,
             "mot_cle":"Commune de Ranohira,à 269 km de Fianarantsoa et à 80 km d’ Ihosy Une fenêtre ouverte sur la biodiversité du Sud Malgache Parc national de l'Isalo Situé dans le sud-ouest de Madagascar, ce parc national est réputé pour ses formations rocheuses spectaculaires, ses canyons profonds, ses piscines naturelles et sa faune variée."
         },{
-            "article_id":2,
             "libelle": "Parc national de Ranomafana",
             "court-description":"Ranomafana... ou un écrin de verdure",
             "description":"Un parc tropical luxuriant dans les Hautes Terres, abritant une grande variété de lémuriens, de caméléons et d'oiseaux.",
@@ -27,14 +25,13 @@
             "site":"https://www.parcs-madagascar.com/parcs/ranomafana.php",
             "autres":null,
             "videos" : [],
-            "images":["https://www.parcs-madagascar.com/parcs/images/ranomafana/_MG_9092.jpg",
-                "https://www.parcs-madagascar.com/parcs/images/ranomafana/_MG_9118.jpg",
-                "https://www.parcs-madagascar.com/parcs/images/ranomafana/IRR_20100605_013.jpg"],
+            "images":[{"lien":"https://www.parcs-madagascar.com/parcs/images/ranomafana/_MG_9092.jpg"},
+                {"lien":"https://www.parcs-madagascar.com/parcs/images/ranomafana/_MG_9118.jpg"},
+                {"lien":"https://www.parcs-madagascar.com/parcs/images/ranomafana/IRR_20100605_013.jpg"}],
             "x":-21.263851113783325,
             "y":47.41931315253349,
             "mot_cle":"Parc national de Ranomafana Ranomafana... ou un écrin de verdure Un parc tropical luxuriant dans les Hautes Terres, abritant une grande variété de lémuriens, de caméléons et d'oiseaux. Vatovavy-Fitovinany,à 65 km au Nord-est de Fianarantsoa"
         },{
-            "article_id":3,
             "libelle": "Avenue des Baobabs",
             "court-description":"Allée de baobab",
             "description":"L’Avenue des Baobabs, ou Allée des Baobabs, est un groupe important de baobabs de Grandidier (Adansonia grandidieri) bordant la route non pavée n ° 8 entre Morondava et Belon’i Tsiribihina dans la région de Menabe à l’ouest de Madagascar. Son paysage saisissant attire des voyageurs du monde entier, ce qui en fait l’un des endroits les plus visités de la région. Il a été un centre d’efforts locaux de conservation et a obtenu le statut de protection temporaire en juillet 2007 par le ministère de l’Environnement, des Eaux et des Forêts – une étape vers la transformation en premier monument naturel de Madagascar.",
@@ -42,8 +39,8 @@
             "site":null,
             "autres":null,
             "videos" : [],
-            "images":["https://th.bing.com/th/id/OIP.G7w14I_Rnj1S1jibzW5OAAHaFh?w=257&h=191&c=7&r=0&o=5&dpr=1.3&pid=1.7",
-            "https://www.dangerousroads.org/cache/images/900x/b/avenueofthebaobabs0-5e652e90.webp"
+            "images":[{"lien":"https://th.bing.com/th/id/OIP.G7w14I_Rnj1S1jibzW5OAAHaFh?w=257&h=191&c=7&r=0&o=5&dpr=1.3&pid=1.7"},
+           {"lien": "https://www.dangerousroads.org/cache/images/900x/b/avenueofthebaobabs0-5e652e90.webp"}
             ],
             "x":-20.250456857894765, 
             "y": 44.41970059601451,

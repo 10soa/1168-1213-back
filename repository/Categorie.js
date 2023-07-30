@@ -14,14 +14,14 @@ exports.getAllCategories = async () => {
 exports.findArticles = async (recherche) => {
     try {
         var unwind = { $unwind: "$article" };
-        var match = {
-        $match: {
-             "article.mot_cle": { $regex:  recherche.motcle , $options: "i" } ,
-        },
-        };
+        const matchQuery = {
+            "article.mot_cle": { $regex:  recherche.motcle , $options: "i" } ,
+        }
         if (recherche.categorie) {
             matchQuery._id = new ObjectID(recherche.categorie);
-          }
+        }
+        var match = { $match: matchQuery};
+        console.log('match',match);
         let data = await Categorie.aggregate([unwind, match]);
         return data;
     } catch (err) {
@@ -42,20 +42,4 @@ exports.findAllArticlesCategorie = async (categorie) => {
     } catch (err) {
         throw err;
     }
-};
-
-/* Fiche Article */
-exports.getOneArticle = async (id) => {
-  try {
-    const varUnwind =  { $unwind: "$article" };
-    const varMatch = {
-      $match: {
-        "article._id": new ObjectID(id)
-      },
-    };
-    const data = await Categorie.aggregate([varUnwind, varMatch]);  
-  return data;
-  } catch (err) {
-      throw err; 
-  }
-};
+}
