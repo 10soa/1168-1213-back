@@ -72,3 +72,19 @@ exports.getFicheUtilisateur = async (req, res) => {
       });
   }
 };
+
+/* fiche Publication */
+exports.getAllUserExperiencePagination = async (req, res) => {
+  try {
+   const utilisateurs = await utilisateurRepository.getAllUserExperiencePagination(req.params.off,req.params.lim,res);
+    res.status(200).json({
+      status: 200,
+      data: utilisateurs,
+    });
+  } catch (err) {
+      res.status(400).json({
+          status: 400,
+          message: err.message,
+      });
+  }
+};

@@ -128,6 +128,40 @@ exports.getFicheUtilisateur = async (id) => {
   }
 };
 
+/* liste Experience Sociale + pagination + recherche */
+exports.getAllUserExperiencePagination = async (off, lim, res) => {
+  try {
+    const varProject = { $project: { email:0,pseudo:0,naissance:0,pays:0,mdp:0,favoris:0} };
+    var unwind = { $unwind: "$partage" };
+    var data1 = await Utilisateur.aggregate([unwind,varProject]);
+    const page = off || 0;
+    const pageNumber = lim || 20;
+    var total = data1.length;
+    let totalPage = Math.floor(Number(total) / pageNumber);
+    if (Number(total) % pageNumber != 0) {
+      totalPage = totalPage + 1;
+    }
+    var data = await Utilisateur.aggregate([unwind,varProject,{
+      $sort: {
+        "partage.date_publication": -1,
+      },
+    }])
+      .skip(Number(off))
+      .limit(Number(lim));
+    return {
+      partage: data,
+      page: page,
+      pageNumber: pageNumber,
+      totalPage: totalPage,
+    };
+  } catch (err) {
+    res.status(400).json({
+      status: 400,
+      message: err.message,
+    });
+  }
+};
+
 
 
 
