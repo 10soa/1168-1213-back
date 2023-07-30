@@ -96,6 +96,22 @@ exports.addUserShare = async (id,partage) => {
   }
 }
 
+/* fiche publiction */
+exports.getOnePublication = async (id) => {
+  try {
+    const varUnwind =  { $unwind: "$partage" };
+    const varMatch = {
+      $match: {
+        "partage._id": new ObjectID(id)
+      },
+    };
+    const data = await Utilisateur.aggregate([varUnwind, varMatch]);  
+  return data;
+  } catch (err) {
+      throw err; 
+  }
+};
+
 
 
 

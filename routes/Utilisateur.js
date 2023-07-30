@@ -7,5 +7,6 @@ router.get('/allUtilisateur', utilisateur.getAllUtilisateurs);
 router.post('/login', utilisateur.login);
 router.post('/inscription', utilisateur.createUtilisateur);
 router.post('/utilisateurs/:id', utilisateur.addUserShare);
+router.get('/partage/:idparatage', utilisateur.getOnePublication);
 
 module.exports = router;

@@ -42,4 +42,20 @@ exports.findAllArticlesCategorie = async (categorie) => {
     } catch (err) {
         throw err;
     }
-}
+};
+
+/* Fiche Article */
+exports.getOneArticle = async (id) => {
+  try {
+    const varUnwind =  { $unwind: "$article" };
+    const varMatch = {
+      $match: {
+        "article._id": new ObjectID(id)
+      },
+    };
+    const data = await Categorie.aggregate([varUnwind, varMatch]);  
+  return data;
+  } catch (err) {
+      throw err; 
+  }
+};

@@ -43,3 +43,19 @@ exports.findArticles = async (req,res) => {
            });
        }
 }
+
+/* fiche Article */
+exports.getOneArticle = async (req, res) => {
+  try {
+   const categories = await categorieRepository.getOneArticle(req.params.idCategorie);
+    res.status(200).json({
+      status: 200,
+      data: categories,
+    });
+  } catch (err) {
+      res.status(400).json({
+          status: 400,
+          message: err.message,
+      });
+  }
+};

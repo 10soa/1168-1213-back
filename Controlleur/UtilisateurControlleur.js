@@ -40,3 +40,19 @@ exports.addUserShare = async (req,res) => {
     });
   }
 }
+
+/* fiche Publication */
+exports.getOnePublication = async (req, res) => {
+  try {
+   const publications = await utilisateurRepository.getOnePublication(req.params.idparatage);
+    res.status(200).json({
+      status: 200,
+      data: publications,
+    });
+  } catch (err) {
+      res.status(400).json({
+          status: 400,
+          message: err.message,
+      });
+  }
+};
