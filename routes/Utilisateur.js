@@ -12,5 +12,7 @@ router.get('/fiche/:idutilisateur', utilisateur.getFicheUtilisateur);
 router.get('/recherchePartage/:off/:lim', utilisateur.getAllUserExperiencePagination);
 router.get('/partage/liste/:iduser/:off/:lim', utilisateur.getAllListPartage_utilisateurPagination);
 router.delete('/partage/delete/:idutilisateur/:idpartage', utilisateur.deletePartageUtilisateur);
+router.get('/favoris/:id', utilisateur.listeFavoris);
+router.post('/favoris/:id/:article', utilisateur.addFavoris);
 
 module.exports = router;

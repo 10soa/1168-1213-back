@@ -24,6 +24,7 @@ const testSchema = new Schema({
         libelle : {type:String},
         description : {type:String},
         localisation : {type:String},
+        image: {type:String},
     }],
 });
 
