@@ -10,5 +10,7 @@ router.post('/utilisateurs/:id', utilisateur.addUserShare);
 router.get('/partage/:idparatage', utilisateur.getOnePublication);
 router.get('/fiche/:idutilisateur', utilisateur.getFicheUtilisateur);
 router.get('/recherchePartage/:off/:lim', utilisateur.getAllUserExperiencePagination);
+router.get('/partage/liste/:iduser/:off/:lim', utilisateur.getAllListPartage_utilisateurPagination);
+router.delete('/partage/delete/:idutilisateur/:idpartage', utilisateur.deletePartageUtilisateur);
 
 module.exports = router;

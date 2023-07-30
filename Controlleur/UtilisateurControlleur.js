@@ -88,3 +88,27 @@ exports.getAllUserExperiencePagination = async (req, res) => {
       });
   }
 };
+
+/* liste partage d'un utilisateur */
+exports.getAllListPartage_utilisateurPagination = async (req, res) => {
+  try {
+   const utilisateurs = await utilisateurRepository.getAllListPartage_utilisateurPagination(req.params.iduser,req.params.off,req.params.lim,res);
+    res.status(200).json({
+      status: 200,
+      data: utilisateurs,
+    });
+  } catch (err) {
+      res.status(400).json({
+          status: 400,
+          message: err.message,
+      });
+  }
+};
+
+/* suppression partage utilsiateur */
+exports.deletePartageUtilisateur = async (req, res) => {
+  utilisateurRepository
+    .deletePartageUtilisateur(req, res)
+    .then((result) => res.status(200).json({ result }))
+    .catch();
+};

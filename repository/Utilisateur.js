@@ -167,7 +167,59 @@ exports.getAllUserExperiencePagination = async (off, lim, res) => {
 };
 
 
+/* liste partage des utilisateurs */
+exports.getAllListPartage_utilisateurPagination = async (idUser,off, lim, res) => {
+  try {
+    const varProject = { $project: { nom:0,prenom:0,_id:0,email:0,pseudo:0,naissance:0,pays:0,mdp:0,favoris:0} };
+    var unwind = { $unwind: "$partage" };
+    const varMatch = {
+      $match: {
+        _id : new ObjectID(idUser)
+      },
+    };
+    var data1 = await Utilisateur.aggregate([unwind,varMatch,varProject]);
+    const page = off || 0;
+    const pageNumber = lim || 20;
+    var total = data1.length;
+    let totalPage = Math.floor(Number(total) / pageNumber);
+    if (Number(total) % pageNumber != 0) {
+      totalPage = totalPage + 1;
+    }
+    var data = await Utilisateur.aggregate([unwind,varMatch,varProject,{
+      $sort: {
+        "partage.date_publication": -1,
+      },
+    }])
+      .skip(Number(off))
+      .limit(Number(lim));
+    return {
+      partage: data,
+      page: page,
+      pageNumber: pageNumber,
+      totalPage: totalPage,
+    };
+  } catch (err) {
+    res.status(400).json({
+      status: 400,
+      message: err.message,
+    });
+  }
+};
 
-
-
-
+/* supprimer partage utilisateur */
+exports.deletePartageUtilisateur = async (req, res) => {
+  try {
+    const userId = req.params.idutilisateur;
+    const partageId = req.params.idpartage;
+    const updatedUser = await Utilisateur.findByIdAndUpdate(
+      userId,
+      { $pull: { partage: { _id: partageId } } },
+      { new: true }
+    );
+    if (!updatedUser) {
+      return res.status(404).json({ error: "Partage non trouvé dans l'utilisateur" });
+    }
+  } catch (err) {
+    res.status(404).json({ msg: err });
+  }
+};
