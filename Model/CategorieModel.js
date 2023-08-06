@@ -5,6 +5,7 @@ var AutoIncrement = require('mongoose-sequence')(mongoose);
 // Create Schema Instance and add schema propertise
 const categorieSchema = new Schema({
     categorie: {type:String},
+    lien:{type:String},
     article: [{
         libelle : {type:String},
         court_description : {type:String},
