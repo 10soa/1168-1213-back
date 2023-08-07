@@ -91,3 +91,32 @@ exports.getAllMediasVideos = async (req, res) => {
       });
   }
 };
+
+/* deroulante liste Catégorie */
+exports.getDeroulanteCategorie = async (req, res) => {
+  try {
+   const categories = await categorieRepository.getDeroulanteCategorie(req,res);
+    res.status(200).json({
+      status: 200,
+      data: categories,
+    });
+  } catch (err) {
+      res.status(400).json({
+          status: 400,
+          message: err.message,
+      });
+  }
+};
+
+/* creation article */
+exports.createArticlePublication = async (req, res) => {
+  try {
+    categorieRepository.createArticle(req,res)
+      .then((result) => res.status(200).json({ data: result }))
+      .catch((error) =>
+        res.status(400).json({ status: 400, message: error.message })
+      );
+  } catch (err) {
+    res.status(400).json({ status: 400, message: err.message });
+  }
+};

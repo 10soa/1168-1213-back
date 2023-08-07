@@ -1,4 +1,8 @@
 var { Categorie } = require("../Model/CategorieModel");
+var { Notification } = require("../Model/NotificationModel");
+var {admin} = require("../FireBase/Firebase");
+const bodyParser = require("body-parser");
+
 var ObjectID = require("mongoose").Types.ObjectId;
 
 exports.getAllCategories = async () => {
@@ -134,4 +138,74 @@ exports.getAllMediasVideos = async (off, lim, res) => {
       message: err.message,
     });
   }
+};
+
+/* saisie article + envoie Notification */
+/* liste categorie (liste déroulate) */
+exports.getDeroulanteCategorie = async (req,res) => {
+  try {
+    const varProject = { $project: {
+      article:0
+    } };
+    var data = await Categorie.aggregate([varProject])
+    return data;
+  } catch (err) {
+    res.status(400).json({
+      status: 400,
+      message: err.message,
+    });
+  }
+};
+
+exports.createArticle = async (req, res) => {
+    var idCategorie=req.params.idcategorie;
+    const article = {
+      libelle : req.body.libelle,
+      description : req.body.description,
+      court_description : req.body.court_description,
+      localisation : req.body.localisation,
+      site : req.body.site,
+      autres : req.body.autres,
+      videos : req.body.videos,
+      images : req.body.images,
+      x : req.body.x,
+      y : req.body.y,
+      mot_cle : req.body.libelle+" "+req.body.court_description
+    }
+    var data=await Categorie.findOneAndUpdate(
+      {
+        _id : new ObjectID(idCategorie)
+      },
+      {
+        $push: {
+          "article": article,
+        },
+      }
+    );
+
+    /* envoi notification */
+    const registrationToken="e0-IVW7-TdiAf0fZihpanU:APA91bGj-Z2wf5VcNrpFLdFhK47RKYO-jphYKxoadeCVLrBN9tBqLEClYbFt3gWEs46qNpqBMwDDGlzZokv1qB-FXEKdJqtB-WPTEFmA3lWsu-GSCKq-VHZyTI7S88C2f1spxALQUSBO";
+    const data1 = {
+      message: {
+        token: registrationToken,
+        notification: {
+          title: req.body.libelle,
+          body: req.body.description,
+        },
+        data: {
+          Nick: "Mario",
+          Room: "PortugalVSDenmark",
+        },
+      },
+    };
+  
+    admin.messaging().send(data1.message);
+    /*------------------- */
+    await Notification.create({
+      date: new Date(Date.now()),
+      libelle: req.body.libelle,
+      article_id : new ObjectID(idCategorie),
+      description : req.body.court_description
+    });
+    return data;
 };

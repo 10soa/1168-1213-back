@@ -9,5 +9,7 @@ router.get('/articles', categorie.findArticles);
 router.get('/article/:idCategorie', categorie.getOneArticle);
 router.get('/multimedia/photos/:off/:lim', categorie.getAllMediasImages);
 router.get('/multimedia/videos/:off/:lim', categorie.getAllMediasVideos);
+router.get('/listederoulante', categorie.getDeroulanteCategorie);
+router.post('/saisieArticle/:idcategorie', categorie.createArticlePublication);
 
 module.exports = router;

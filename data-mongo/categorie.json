@@ -12,9 +12,13 @@
             "site":"http://www.parcs-madagascar.com/parcs/isalo.php",
             "autres":null,
             "videos" : [],
-            "images":["https://th.bing.com/th/id/R.6429da7703c5671b19ffae37fbacbef0?rik=wOrALhoWS2cRcQ&pid=ImgRaw&r=0",
-            "https://s-media-cache-ak0.pinimg.com/originals/99/c9/9d/99c99d4f4011de791b30dc449588cb4d.jpg",
-            "https://th.bing.com/th/id/OIP.UQgh0okCT1z5sckz_DHSaQHaGj?pid=ImgDet&rs=1"],
+            "images":[{
+                "lien" : "https://th.bing.com/th/id/R.6429da7703c5671b19ffae37fbacbef0?rik=wOrALhoWS2cRcQ&pid=ImgRaw&r=0" 
+            },{
+                "lien" : "https://th.bing.com/th/id/R.6429da7703c5671b19ffae37fbacbef0?rik=wOrALhoWS2cRcQ&pid=ImgRaw&r=0" 
+            },{
+                "lien" : "https://th.bing.com/th/id/R.6429da7703c5671b19ffae37fbacbef0?rik=wOrALhoWS2cRcQ&pid=ImgRaw&r=0" 
+            }],
             "x":-22.46462138507317, 
             "y":45.261512941372786,
             "mot_cle":"Commune de Ranohira,à 269 km de Fianarantsoa et à 80 km d’ Ihosy Une fenêtre ouverte sur la biodiversité du Sud Malgache Parc national de l'Isalo Situé dans le sud-ouest de Madagascar, ce parc national est réputé pour ses formations rocheuses spectaculaires, ses canyons profonds, ses piscines naturelles et sa faune variée."

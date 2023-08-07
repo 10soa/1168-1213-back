@@ -25,6 +25,7 @@ const testSchema = new Schema({
         description : {type:String},
         localisation : {type:String},
     }],
+    sexe : {type:Number}
 });
 
 let Utilisateur = mongoose.model("Utilisateur", testSchema,"Utilisateur");
