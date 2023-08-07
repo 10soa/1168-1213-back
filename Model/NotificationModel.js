@@ -7,7 +7,8 @@ var ObjectID = require("mongoose").Types.ObjectId;
 const testSchema = new Schema({
     libelle: {type:String},
     article_id : {type:ObjectID},
-    description : {type : String}
+    description : {type : String},
+    date : {type : Date},
 });
 
 let Notification = mongoose.model("Notification", testSchema,"Notification");

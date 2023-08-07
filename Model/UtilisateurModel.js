@@ -26,6 +26,7 @@ const testSchema = new Schema({
         localisation : {type:String},
         image: {type:String},
     }],
+    sexe : {type:Number}
 });
 
 let Utilisateur = mongoose.model("Utilisateur", testSchema,"Utilisateur");
