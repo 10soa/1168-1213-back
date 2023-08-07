@@ -39,6 +39,7 @@ exports.login = async (username, mdp, res) => {
 exports.createUtilisateur = async (req, res) => {
   try {
     const { nom,prenom,email,pseudo,naissance,pays,mdp,sexe } = req.body;
+    console.log(req.body);
     if (!mdp)return res.status(400).json({ error: 'Le champ "Mot de passe" est requis.' });
     if(!nom)return res.status(400).json({ error: 'Le champ "Nom" est requis.' });
     if (!prenom)return res.status(400).json({ error: 'Le champ "Prenom" est requis.' });
@@ -46,7 +47,7 @@ exports.createUtilisateur = async (req, res) => {
     if (!pseudo)return res.status(400).json({ error: 'Le champ "Pseudo" est requis.' });
     if(!naissance)return res.status(400).json({ error: 'Le champ "Date de naissance" est requis.' });
     if (!pays)return res.status(400).json({ error: 'Le champ "Pays d\'origine" est requis.' });
-    if (!sexe)return res.status(400).json({ error: 'Le champ "Sexe" est requis.' });
+    if (sexe==undefined)return res.status(400).json({ error: 'Le champ "Sexe" est requis.' });
 
     const saltRounds = 10;
     const salt = await bcrypt.genSalt(saltRounds);
